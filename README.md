@@ -155,3 +155,26 @@ add show page: `app/views/articles/show.html.erb`
 
 <p><%= @article.body %></p>
 ```
+
+#### 7.2 Resourceful Routing
+
+Use `resources :articles` in routes.rb, generate CRUD routes automatically.
+
+Use command `rails routes` to confirm routes
+
+Output example:
+
+```
+> rails routes
+Prefix      Verb   URI Pattern                                                                                       Controller#Action
+            GET    /                                                                                                 top#index
+articles    GET    /articles(.:format)                                                                               articles#index
+            POST   /articles(.:format)                                                                               articles#create
+new_article GET    /articles/new(.:format)                                                                           articles#new
+edit_article GET    /articles/:id/edit(.:format)                                                                      articles#edit
+article     GET    /articles/:id(.:format)                                                                           articles#show
+            PATCH  /articles/:id(.:format)                                                                           articles#update
+            PUT    /articles/:id(.:format)                                                                           articles#update
+            DELETE /articles/:id(.:format)                                                                           articles#destroy
+        ...
+```
