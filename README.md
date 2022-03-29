@@ -196,3 +196,63 @@ first argument: link's text, second argument: link's destination
 `<%= link_to article.title, article %>`
 
 this `link_to` will call `article_path`, the `<a>` tag above will become this `link_to` method
+
+#### 7.3 Creating a New Article
+
+Add `new` and `create` method to controller
+
+```
+  def new
+    @article = Article.new
+  end
+
+  def create
+    @article = Article.new(title: "...", body: "...")
+
+    if @article.save
+      redirect_to @article
+    else
+      render :new, status: :unprocessable_entity
+    end
+  end
+```
+
+##### 7.3.1 Using a Form Builder
+
+Create `new` view page
+
+`app\views\articles\new.html.erb`
+
+contents:
+
+```
+<h1>New Articles</h1>
+
+<%= form_with model: @article do |form| %>
+    <div>
+        <%= form.label :title %><br>
+        <%= form.text_field :title %>
+    </div>
+    <div>
+        <%= form.body :body %><br>
+        <%= form.text_area :body %>
+    </div>
+    <div><%= form.submit %></div>
+<% end %>
+```
+
+##### 7.3.2 Using Strong Parameters
+
+Pass the whole params use `article_params`, define the `article_params` in private method, use `require` and `permit` to filter which param can be passed. This feature calls _Strong Parameters_.
+
+```
+  def create
+    @article = Article.new(article_params)
+
+    ...
+
+  private
+    def article_params
+      params.require(:article).permit(:title, :body)
+    end
+```
