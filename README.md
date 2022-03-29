@@ -178,3 +178,21 @@ article      GET    /articles/:id(.:format)                       articles#show
              DELETE /articles/:id(.:format)                       articles#destroy
         ...
 ```
+
+path helper methods
+
+The values in the "Prefix" column above plus a suffix of `_url` or `_path` form the names of these helpers. For example, the article_path helper returns "/articles/#{article.id}" when given an article.
+
+```
+<a href="<%= article_path(article) %>">
+    <%= article.title %>
+</a>
+```
+
+`link_to` helper
+
+first argument: link's text, second argument: link's destination
+
+`<%= link_to article.title, article %>`
+
+this `link_to` will call `article_path`, the `<a>` tag above will become this `link_to` method
