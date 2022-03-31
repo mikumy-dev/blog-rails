@@ -4,4 +4,11 @@
 
 <%= link_to "Edit", edit_article_path(@article) %>
 <br>
+<a href="/articles/<%= @article.id %>/delete">delete</a><br>
+<%= link_to "Destroy", article_path(@article), 
+    method: :delete, 
+    data: {
+    confirm: "Are you sure to delete?"
+} %>
+<br>
 <a href="/articles">Back</a>

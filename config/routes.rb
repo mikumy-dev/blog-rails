@@ -5,4 +5,5 @@ Rails.application.routes.draw do
   root "articles#index"
   # get "/", to: "top#index"
   resources :articles
+  get "/articles/:id/delete", to: "articles#destroy"
 end
